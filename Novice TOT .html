@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science Novice TOT - 20 Days Program</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&family=Chewy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4285F4;
+            --secondary: #34A853;
+            --accent: #FBBC05;
+            --light: #F8F9FA;
+            --dark: #202124;
+            --success: #0F9D58;
+            --info: #17A2B8;
+            --danger: #EA4335;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(32, 33, 36, 0.7);
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            font-family: 'Fredoka One', cursive;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            color: var(--accent);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            font-family: 'Chewy', cursive;
+            color: white;
+        }
+        
+        .progress-container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 40px auto;
+            max-width: 900px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border: 2px solid var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .progress-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-family: 'Fredoka One', cursive;
+            color: var(--primary);
+        }
+        
+        .progress-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background-color: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: white;
+            font-weight: bold;
+            font-family: 'Fredoka One', cursive;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                            rgba(255,255,255,0.1) 0%, 
+                            rgba(255,255,255,0.3) 50%, 
+                            rgba(255,255,255,0.1) 100%);
+            animation: shimmer 2s infinite linear;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .lessons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .lesson-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-10px) perspective(1000px) rotateX(5deg) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .lesson-card.completed {
+            border-left: 10px solid var(--success);
+        }
+        
+        .lesson-card.locked {
+            filter: grayscale(80%);
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Fredoka One', cursive;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.1) 50%,
+                rgba(255,255,255,0) 100%
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite linear;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+        
+        .card-body {
+            padding: 25px;
+            text-align: center;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--light);
+            position: relative;
+        }
+        
+        .card-body h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: var(--dark);
+            font-family: 'Chewy', cursive;
+        }
+        
+        .card-footer {
+            padding: 20px;
+            text-align: center;
+            background-color: white;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #3367D6);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #3367D6, #1A56CB);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), #2D9144);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #2D9144, #1B7E36);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #0B8043);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(135deg, #0B8043, #096B38);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #D33426);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #D33426, #BA271B);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .locked-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: rgba(0,0,0,0.2);
+            font-size: 1.8rem;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .completed-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--success);
+            font-size: 1.8rem;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            animation: bounce 1s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            position: relative;
+            animation: modalFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-100px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: transform 0.3s ease;
+            background: rgba(0,0,0,0.05);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+            color: var(--primary);
+        }
+        
+        .lesson-content {
+            font-family: 'Nunito', sans-serif;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .lesson-content h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 25px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .lesson-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .lesson-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin: 25px auto;
+            display: block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 3px solid white;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background-color: var(--accent);
+            opacity: 0;
+            z-index: 9999;
+            animation: confetti 4s ease-out forwards;
+        }
+        
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg) scale(0); opacity: 0; }
+        }
+        
+        .floating-icons {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: float 15s infinite linear;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        
+        .day-badge {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--accent), #F4B400);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-family: 'Fredoka One', cursive;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .sticker {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.9;
+            z-index: 1;
+        }
+        
+        .auto-complete-notice {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            border-left: 5px solid var(--info);
+        }
+        
+        @media (max-width: 992px) {
+            .lessons-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .modal-content {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .progress-container {
+                padding: 20px;
+            }
+            
+            .lesson-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="container">
+                <h1>Computer Science TOT(Novice Level)</h1>
+                <div class="subtitle">20 Days Training Program Journey</div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-title">You have learned on your Training Progress</div>
+            <div class="progress-details">
+                <span id="completed-count">0</span> of <span>20</span> days completed
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill">0%</div>
+            </div>
+        </div>
+        
+        <div class="lessons-container" id="lessons-container">
+            <!-- Day cards will be generated by JavaScript -->
+        </div>
+    </div>
+    
+    <div class="modal" id="lesson-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="day-badge" id="day-badge">Day 1</div>
+            <div class="lesson-content" id="lesson-content">
+                <!-- Lesson content will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Track active lesson and timer
+        let activeLessonDay = null;
+        let autoCompleteTimer = null;
+        let timeRemaining = 1200; // 20 minutes in seconds
+        let timerInterval = null;
+        
+        // Generate all 20 days of TOT content
+        const generateLessons = () => {
+            const lessons = [];
+            const topics = [
+                "Computer Science Teacher & Introduction to Computer Science Education",
+                "History and Evoluation of Computer Science Education & Computer Science Education Ecosystem",
+                "Computer Science in 21st Century & Why should we need to teach computer science",
+                "Bloom's Taxonomy",
+                "Revised Bloom's Taxomomy",
+                "Basic computer software & hardware",
+                "Fundamentals of Algorithms and Problem Solving ",
+                "Introduction of Kreative Kid's Lab",
+                "Kreative Kid's Lab Level-1 & Teaching Methodologies",
+                "Introduction to Classroom Management & Classroom Organization",
+                "Building well organize learning centre & Student engagement strategies",
+                "Classroom Assessment and Feedback",
+                "Types of Assessment methods for Kreative Kid's Lab",
+                "Designing Assessments & Rubic Type Marking Scheme",
+                "Feedback & Grading & Authentic Assessment",
+                "Teaching Kreative Kid's Lab Level-1",
+                "Teaching Kreative Kid's Lab Level-1",
+                "Teaching Kreative Kid's Lab Level-1",
+                "Teaching Kreative Kid's Lab Level-1",
+                "Setup & using of Computer Classroom Management Software"
+            ];
+            
+            for (let i = 0; i < 20; i++) {
+                lessons.push({
+                    day: i + 1,
+                    title: topics[i],
+                    completed: false,
+                    link: `https://sites.google.com/view/novice-tot/home/day-${i+1}`,
+                    content: `
+                        <h2>Day ${i+1}: ${topics[i]}</h2>
+                        <p>Welcome to Day ${i+1} of your Computer Science Training of Trainers program!</p>
+                        
+                        
+                        <div class="auto-complete-notice">
+                            <i class="fas fa-info-circle"></i> ယနေ့သင်ခန်းစာကို ပြီးမြောက်အောင်လေ့လာပြီးပါက နောက်တစ်နေ့အတွက် သင်ခန်းစာကို လေ့လာနိုင်မည်ဖြစ်ပါသည်။.
+                        </div>
+                        
+                        <h3>ယနေ့သင်ခန်းစာ၏ ရည်ရွယ်ချက်</h3>
+                        <p>${generateObjectives(i+1)}</p>
+                       
+                        <h3>Key Activities:</h3>
+                        <p>${generateActivities(i+1)}</p>
+                        
+                        <h3>Resources:</h3>
+                        <p>${generateResources(i+1)}</p>
+                    `
+                });
+            }
+            return lessons;
+        };
+        
+        const generateObjectives = (day) => {
+            const objectives = [
+                "ကွန်ပျူတာသိပ္ပံဆရာ တစ်ယောက်ဖြစ်ဖို့ လိုအပ်တဲ့အရာတွေနဲ့  computer science education အကြောင်းကိုသိရှိစေရန်ဖြစ်ပါတယ်",
+                "ကွန်ပျူတာသိပ္ပံပညာရေး၏ သမိုင်းကြောင်း၊ ဖွံ့ဖြိုးလာမှုနှင့် ကွန်ပျူတာသိပ္ပံပညာရေး ဂေဟစနစ်ကို လေ့လာသိရှိစေရန် ဖြစ်ပါတယ်",
+                "၂၁ရာစုတွင် ကွန်ပျူတာသိပ္ပံ၏ အခန်းကဏ္ဍနှင့် ဘာကြောင့် ကလေးတွေကို ကွန်ပျူတာသိပ္ပံသင်ဖို့လိုတာလဲဆိုတာ နားလည်စေရန်ဖြစ်ပါတယ် ",
+                "၂၁ ရာစုပညာ‌ရေး၏ အခြေခံဖြစ်တဲ့ Bloom's Taxonomy အကြောင်းကို လေ့လာရမှာဖြစ်ပါတယ်",
+                "ယနေ့ခေတ် ဆရာ/ဆရာမများအတွက် အထူးကိုက်ညီသည့် ၂၀၀၁ ခုနှစ်တွင် ပေါ်ပေါက်လာသော Revised Bloom's Taxonomy ကို လေ့လာရမှာဖြစ်ပါတယ်",
+                "ကွန်ပျူတာ software နှင့် hardware အခြေခံများကိုလေ့လာရမှာ ဖြစ်ပါတယ်",
+                "Algorithm နှင့် ပြဿနာဖြေရှင်းနည်းရဲ့ အခြေခံများကို သိရှိနားလည်စေရန် ဖြစ်ပါတယ်",
+                "Kreative Kid's Lab ရဲ့သမိုင်းကြောင်း၊ ဖြစ်တည်လာမှု နှင့် ရည်ရွယ်ချက်များကို လေ့လာသိရှိနိုင်စေရန် ဒီသင်ခန်းစာကို လေ့လာရမှာဖြစ်ပါတယ်။",
+                "Kreative Kid's Lab Level-1 နှင့် သင်ကြားနည်းစနစ်များကို အခြေခံလေ့လာရမှာဖြစ်ပါတယ်။ ",
+                "စာသင်ခန်းဖွဲ့စည်းခြင်းနှင့် စာသင်ခန်းစီမံခန့်ခွဲခြင်းမှာ လိုအပ်တဲ့အချက်များနှင့် အားသာချက်/အားနည်းချက်တို့ကို သိရှိနိုင်ရန် ဒီသင်ခန်းစာကို လေ့လာရမှာ ဖြစ်ပါတယ်။",
+                "ကောင်းစွာဖွဲ့စည်းထားတဲ့ စာသင်ခန်းတွေဟာ ဘယ်လိုအကျိုးကျေးဇူးတွေရှိသလဲ။ ဘယ်လိုအချက်တွေပါရမလဲဆိုတာအပြင် ကျောင်းသာကျောင်းသူများနှင့် Engagement ဖြစ်ခြင်းရဲ့ အကျိုးကျေးဇူးတွေကို သိရှိနားလည်ကျင့်သုံးနိုင်ရန်ဖြစ်ပါတယ်။",
+                "စာသင်ခန်းအတွင် စစ်ဆေးအကဲဖြတ်မှုနှင့် Feedback တို့ဘာကြောင့်လိုသလဲ၊ ဘယ်လိုစစ်ဆေးအကဲဖြတ်နည်းတွေရှိသလဲ။ ဘယ်လိုပြင်ဆင်ရမလဲဆိုတာကို လေ့လာသိရှိကာ လက်တွေ့ကျင့်သုံးနိုင်ရန် ဖြစ်ပါတယ်။  ",
+                "Kreative Kid's Lab ရဲ့ စစ်ဆေးအကဲဖြတ်နည်း တွေကို သိရှိနားလည်ကာ ကျင့်သုံးနိုင်စေရန် ဖြစ်ပါတယ်",
+                "စစ်ဆေးအကဲဖြတ်နည်းတွေကို ဘယ်လို ဒီဇိုင်းထုတ်ပြင်ဆင်မလဲ ဆိုတာအပြင် Rubic နည်းဖြင့် အမှတ်ပေးအကဲဖြတ်နည်းကို လေ့လာကျင့်သုံးနိုင်ရန်ဖြစ်ပါတယ် ",
+                "Feedback and Grading System အကြောင်းနှင့် Authentic Assessment အကြောင်း မိတ်ဆက်သင်ကြားရမှာဖြစ်ပါတယ်။ ",
+                "Kreative Kid's Lab Level-1 သင်ရိုးစာအုပ်ပါ သင်ခန်းစာများကို အသေးစိတ်လေ့လာရမှာဖြစ်ပြီး သတိထားသင့်တာများကို လေ့လာရမှာ ဖြစ်ပါတယ်။",
+                "ပြီးခဲ့တဲ့သင်ခန်းစာရဲ့အဆက် Kreative Kid's Lab Level-1 သင်ရိုးစာအုပ်ပါ သင်ခန်းစာများကို အသေးစိတ်လေ့လာရမှာဖြစ်ပြီး သတိထားသင့်တာများကို လေ့လာရမှာ ဖြစ်ပါတယ်။",
+                "ပြီးခဲ့တဲ့သင်ခန်းစာရဲ့အဆက် Kreative Kid's Lab Level-1 သင်ရိုးစာအုပ်ပါ သင်ခန်းစာများကို အသေးစိတ်လေ့လာရမှာဖြစ်ပြီး သတိထားသင့်တာများကို လေ့လာရမှာ ဖြစ်ပါတယ်။",
+                "ပြီးခဲ့တဲ့သင်ခန်းစာရဲ့အဆက် Kreative Kid's Lab Level-1 သင်ရိုးစာအုပ်ပါ သင်ခန်းစာများကို အသေးစိတ်လေ့လာရမှာဖြစ်ပြီး သတိထားသင့်တာများကို လေ့လာရမှာ ဖြစ်ပါတယ်။",
+                "TOT Level-2 တွင်ပါဝင်သော Classroom Management Software ထည့်သွင်းခြင်း၊ အသုံးပြုခြင်းတို့ကို အသေးစိတ်လေ့လာသိရှိပြီး အသုံးချနိုင်ရန်ဖြစ်ပါတယ် "
+            ];
+            return objectives[day-1] || "Master key computer science teaching concepts";
+        };
+        
+        const generateActivities = (day) => {
+            const activities = [
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ဒါ့အပြင် Assignment  တစ်ခုကိုလည်းရေးသားပေးပို့ရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ Kreative Kid's Lab သင်ရိုးဖြင့် တွဲသုံးရသော Software များပါဝင်ပါသည်။  ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ Lesson Plan Assingment ရေးသားပေးပို့ရမှာဖြစ်ပါတယ်။",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့် ရည်ရွယ်ချက်ပါ အကြောင်းအရာများကိုလေ့လာမှတ်သားကာ အောက်တွင် Assessment ကိုမပျက်မကွက် ဖြေဆိုရမှာ ဖြစ်ပါတယ်။ ",
+                "ဗီဒီယိုဖြင့်သာ လေ့လာရန်ဖြစ်ပါတယ် ",
+                "ဗီဒီယိုဖြင့်သာ လေ့လာရန်ဖြစ်ပါတယ်",
+                "ဗီဒီယိုဖြင့်သာ လေ့လာရန်ဖြစ်ပါတယ်",
+                "ဗီဒီယိုဖြင့်သာ လေ့လာရန်ဖြစ်ပါတယ်",
+                "ဗီဒီယိုဖြင့်သာ လေ့လာရန်ဖြစ်ပါတယ်"
+            ];
+            return activities[day-1] || "Interactive workshop, hands-on practice, group discussion";
+        };
+        
+        const generateResources = (day) => {
+            const resources = [
+                "Video, Assessment Form",
+                "Video, Assessment Form",
+                "Video, Assessment Form",
+                "Video, Assessment Form",
+                "Video, Assessment Form, Sample Assignment pdf",
+                "Video, Assessment Form",
+                "Video, Assessment Form",
+                "Video, Assessment Form,Softwares Download Links",
+                "Video, Assessment Form,Sample Lesson Plan pdf",
+                "Video, Assessment Form",
+                "Video, Assessment Form",
+                "Video, Assessment Form",
+                "Video, Assessment Form",
+                "Video, Assessment Form",
+                "Video, Assessment Form,Novice TOT Pdf",
+                "Video",
+                "Video",
+                "Video",
+                "Video",
+                "Video,Veyon Master Software Link"
+            ];
+            return resources[day-1] || "Training manual, online resources, code samples";
+        };
+        
+        const lessons = generateLessons();
+        
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            renderLessons();
+            updateProgress();
+            createFloatingIcons();
+            
+            // Check if there's a current day in localStorage
+            const currentDay = localStorage.getItem('currentDay');
+            if (!currentDay && lessons.length > 0) {
+                localStorage.setItem('currentDay', 1);
+            }
+        });
+        
+        // Create floating icons in the background
+        function createFloatingIcons() {
+            const icons = ['<i class="fas fa-laptop-code"></i>', '<i class="fas fa-code"></i>', 
+                         '<i class="fas fa-server"></i>', '<i class="fas fa-network-wired"></i>',
+                         '<i class="fas fa-shield-alt"></i>', '<i class="fas fa-robot"></i>',
+                         '<i class="fas fa-database"></i>', '<i class="fas fa-microchip"></i>'];
+            const container = document.querySelector('.container');
+            
+            for (let i = 0; i < 12; i++) {
+                const icon = document.createElement('div');
+                icon.className = 'floating-icons';
+                icon.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+                icon.style.left = `${Math.random() * 100}%`;
+                icon.style.top = `${Math.random() * 100}%`;
+                icon.style.animationDuration = `${10 + Math.random() * 20}s`;
+                icon.style.animationDelay = `${Math.random() * 5}s`;
+                icon.style.fontSize = `${1 + Math.random() * 2}rem`;
+                icon.style.color = `rgba(66, 133, 244, ${0.4 + Math.random() * 0.6})`;
+                container.appendChild(icon);
+            }
+        }
+        
+        // Render all lesson cards
+        function renderLessons() {
+            const container = document.getElementById('lessons-container');
+            container.innerHTML = '';
+            
+            const currentDay = parseInt(localStorage.getItem('currentDay')) || 1;
+            
+            lessons.forEach((lesson, index) => {
+                const isCompleted = localStorage.getItem(`lesson-${lesson.day}-completed`) === 'true';
+                const isLocked = lesson.day > currentDay && !isCompleted;
+                
+                const card = document.createElement('div');
+                card.className = `lesson-card ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}`;
+                
+                // Add random sticker to some cards
+                const hasSticker = Math.random() > 0.7;
+                const sticker = hasSticker ? `<div class="sticker" style="background-image: url('https://emojicdn.elk.sh/${getRandomEmoji()}'); top: ${Math.random() * 60 + 10}px; left: ${Math.random() * 60 + 10}px; transform: rotate(${Math.random() * 60 - 30}deg);"></div>` : '';
+                
+                card.innerHTML = `
+                    <div class="card-header">Day ${lesson.day}</div>
+                    <div class="card-body">
+                        <h3>${lesson.title}</h3>
+                        ${isCompleted ? '<div class="completed-icon"><i class="fas fa-check-circle"></i></div>' : ''}
+                        ${isLocked ? '<div class="locked-icon"><i class="fas fa-lock"></i></div>' : ''}
+                        ${sticker}
+                    </div>
+                    <div class="card-footer">
+                        ${!isLocked ? 
+                            `<a href="#" class="btn ${isCompleted ? 'btn-secondary' : 'btn-primary'}" data-day="${lesson.day}">
+                                <i class="fas ${isCompleted ? 'fa-redo' : 'fa-play'}"></i>
+                                ${isCompleted ? 'Review Day' : 'Start Day'}
+                            </a>` : 
+                            '<span style="color: #888;"><i class="fas fa-clock"></i> Available soon</span>'}
+                    </div>
+                `;
+                
+                container.appendChild(card);
+                
+                // Add click event to the button if not locked
+                if (!isLocked) {
+                    const btn = card.querySelector('.btn');
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        openLesson(lesson.day);
+                    });
+                }
+            });
+        }
+        
+        function getRandomEmoji() {
+            const emojis = [
+                ' '
+            ];
+            return emojis[Math.floor(Math.random() * emojis.length)];
+        }
+        
+        // Open a lesson in the modal
+        function openLesson(day) {
+            const lesson = lessons.find(l => l.day === day);
+            if (!lesson) return;
+            
+            activeLessonDay = day;
+            timeRemaining = 1200; // Reset to 20 minutes
+            
+            const modal = document.getElementById('lesson-modal');
+            const content = document.getElementById('lesson-content');
+            const dayBadge = document.getElementById('day-badge');
+            
+            // Update day badge
+            dayBadge.textContent = `Day ${day}`;
+            dayBadge.style.background = getRandomGradient();
+            
+            // Load lesson content
+            content.innerHTML = lesson.content;
+            
+            // Start the timer
+            startTimer(day);
+            
+            // Add action buttons
+            const actionButtons = document.createElement('div');
+            actionButtons.className = 'action-buttons';
+            
+            // Add a link to the external lesson
+            const externalLink = document.createElement('a');
+            externalLink.href = lesson.link;
+            externalLink.className = 'btn btn-primary';
+            externalLink.innerHTML = '<i class="fas fa-external-link-alt"></i> သင်ခန်းစာအပြည့်အစုံကို လေ့လာမည်';
+            externalLink.target = '_blank';
+            externalLink.addEventListener('click', function() {
+                localStorage.setItem(`lesson-${day}-viewed`, 'true');
+            });
+            actionButtons.appendChild(externalLink);
+            
+            // Add a close button
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'btn btn-danger';
+            closeBtn.innerHTML = '<i class="fas fa-times"></i> Close';
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                clearTimer();
+            });
+            actionButtons.appendChild(closeBtn);
+            
+            content.appendChild(actionButtons);
+            
+            // Show modal
+            modal.style.display = 'flex';
+            
+            // Close modal when clicking X
+            document.querySelector('.close-modal').addEventListener('click', function() {
+                modal.style.display = 'none';
+                clearTimer();
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    clearTimer();
+                }
+            });
+        }
+        
+        function getRandomGradient() {
+            const gradients = [
+                'linear-gradient(135deg, #4285F4, #3367D6)',
+                'linear-gradient(135deg, #34A853, #2D9144)',
+                'linear-gradient(135deg, #FBBC05, #F4B400)',
+                'linear-gradient(135deg, #EA4335, #D33426)',
+                'linear-gradient(135deg, #4285F4, #EA4335)',
+                'linear-gradient(135deg, #34A853, #FBBC05)'
+            ];
+            return gradients[Math.floor(Math.random() * gradients.length)];
+        }
+        
+        // Start the timer
+        function startTimer(day) {
+            clearTimer();
+            
+            // Check if already completed
+            const isCompleted = localStorage.getItem(`lesson-${day}-completed`) === 'true';
+            if (isCompleted) return;
+            
+            // Check if user has viewed the full lesson
+            const hasViewed = localStorage.getItem(`lesson-${day}-viewed`) === 'true';
+            
+            // Start timer if user has viewed materials
+            if (hasViewed) {
+                timerInterval = setInterval(() => {
+                    timeRemaining--;
+                    
+                    if (timeRemaining <= 0) {
+                        completeLesson(day);
+                        clearTimer();
+                    }
+                }, 1000);
+            }
+        }
+        
+        // Clear the timer
+        function clearTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+        
+        // Mark a lesson as completed
+        function completeLesson(day) {
+            localStorage.setItem(`lesson-${day}-completed`, 'true');
+            
+            // Update current day if this was the current day
+            const currentDay = parseInt(localStorage.getItem('currentDay')) || 1;
+            if (day === currentDay && day < lessons.length) {
+                localStorage.setItem('currentDay', day + 1);
+            }
+            
+            // Update UI
+            renderLessons();
+            updateProgress();
+            
+            // Close modal
+            document.getElementById('lesson-modal').style.display = 'none';
+            
+            // Show celebration
+            celebrate();
+        }
+        
+        // Update progress bar
+        function updateProgress() {
+            let completedCount = 0;
+            lessons.forEach(lesson => {
+                if (localStorage.getItem(`lesson-${lesson.day}-completed`) === 'true') {
+                    completedCount++;
+                }
+            });
+            
+            const progress = Math.round((completedCount / lessons.length) * 100);
+            const progressFill = document.getElementById('progress-fill');
+            progressFill.style.width = `${progress}%`;
+            progressFill.textContent = `${progress}%`;
+            
+            // Update completed count
+            document.getElementById('completed-count').textContent = completedCount;
+        }
+        
+        // Celebration effect
+        function celebrate() {
+            for (let i = 0; i < 150; i++) {
+                createConfetti();
+            }
+            
+            // Play celebration sound (optional)
+            const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3');
+            audio.volume = 0.3;
+            audio.play().catch(e => console.log('Audio play failed:', e));
+        }
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            
+            // Random position at top
+            confetti.style.left = Math.random() * 100 + 'vw';
+            
+            // Random size
+            const size = Math.random() * 15 + 5;
+            confetti.style.width = size + 'px';
+            confetti.style.height = size + 'px';
+            
+            // Random color
+            const colors = ['#4285F4', '#34A853', '#FBBC05', '#EA4335', '#9E9E9E', '#FF9800'];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Random shape
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            
+            // Random rotation
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            
+            // Random animation duration
+            confetti.style.animationDuration = `${2 + Math.random() * 3}s`;
+            
+            document.body.appendChild(confetti);
+            
+            // Remove after animation
+            setTimeout(() => {
+                confetti.remove();
+            }, 4000);
+        }
+        
+        // Track if user has viewed the full lesson
+        window.addEventListener('blur', function() {
+            if (activeLessonDay) {
+                localStorage.setItem(`lesson-${activeLessonDay}-viewed`, 'true');
+                startTimer(activeLessonDay);
+            }
+        });
+        
+        window.addEventListener('focus', function() {
+            if (activeLessonDay) {
+                // Check if user is back from viewing full lesson
+                const hasViewed = localStorage.getItem(`lesson-${activeLessonDay}-viewed`) === 'true';
+                if (hasViewed) {
+                    startTimer(activeLessonDay);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
