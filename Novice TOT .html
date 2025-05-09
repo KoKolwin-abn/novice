@@ -602,7 +602,7 @@
         // Track active lesson and timer
         let activeLessonDay = null;
         let autoCompleteTimer = null;
-        let timeRemaining = 1200; // 20 minutes in seconds
+        let timeRemaining = 180; // 20 minutes in seconds
         let timerInterval = null;
         
         // Generate all 20 days of TOT content
@@ -837,7 +837,7 @@
             if (!lesson) return;
             
             activeLessonDay = day;
-            timeRemaining = 1200; // Reset to 20 minutes
+            timeRemaining = 180; // Reset to 20 minutes
             
             const modal = document.getElementById('lesson-modal');
             const content = document.getElementById('lesson-content');
